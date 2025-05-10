@@ -4,79 +4,74 @@ A collection of tools for Hyprland, a dynamic tiling Wayland compositor. This re
 
 
 
-## Hyprland Dynamic Display Layout Toggler
+# Hyprland Display Positioner (v0.7)
 
-This script provides a flexible way to manage and toggle the layout of a laptop's internal display and a single connected external monitor in a Hyprland environment. It supports both horizontal (side-by-side) and vertical (stacked) arrangements, automatically handling scaling for 4K displays and ensuring correct mouse cursor passthrough.
+This script dynamically positions your laptop display and an external monitor in Hyprland using simple, Vim-key inspired commands. It attempts to automatically identify your laptop display and applies appropriate scaling (e.g., 1.5x for 4K displays).
 
-### Features
+## Features
 
-* **Dynamic Layout Toggling:**
-    * Toggle between the laptop display being on the left/right of the external display.
-    * Toggle between the laptop display being on the top/bottom of the external display.
-* **Automatic Monitor Detection:** Automatically identifies the connected external monitor and its properties (resolution, refresh rate).
-* **Smart 4K Scaling:** Applies a `1.5x` scale factor to the external monitor if it's detected as 4K (3840x2160). Other resolutions use `1x` scale. The laptop display is always set to `1x` scale.
-* **Correct Mouse Passthrough:** Calculates and uses logical (scaled) monitor dimensions to ensure seamless mouse movement between displays.
-* **Stateful Toggling:** Remembers the last layout for each mode (horizontal/vertical) and switches to the other available option within that mode.
+* **Dynamic Display Detection:** Automatically attempts to identify "Laptop" and "External" displays. Prefers names like "eDP-1" or "LVDS-1" for the laptop display.
+* **Absolute Positioning:** Uses single flags to set a specific layout:
+    * `-h`: External display to the LEFT of Laptop
+    * `-l`: External display to the RIGHT of Laptop
+    * `-k`: External display ABOVE Laptop
+    * `-j`: External display BELOW Laptop
+* **Smart Scaling:** Applies 1.5x scale to any 4K (3840x2160) display, and 1x to others, independently for each monitor.
+* **Focus on 2-Monitor Setups:** Designed primarily for arranging one laptop and one external display. Also handles single-monitor setups gracefully.
 
-### Prerequisites
+## Prerequisites
 
-Ensure the following utilities are installed on your system:
-* `hyprctl` (part of Hyprland)
-* `jq` (command-line JSON processor)
-* `bc` (basic calculator for arithmetic)
+Ensure you have the following installed:
+* `hyprctl` (comes with Hyprland)
+* `jq` (JSON processor)
+* `bc` (basic calculator utility)
 
-You can typically install `jq` and `bc` using your system's package manager (e.g., `sudo apt install jq bc` or `sudo pacman -S jq bc`).
+You can usually install `jq` and `bc` via your system's package manager (e.g., `sudo apt install jq bc` or `sudo pacman -S jq bc`).
 
-### Configuration
+## Setup
 
-1.  **Script Name:** Save the script to a convenient location, for example, `~/scripts/hyprland-tools/hypr_display_toggle.sh`.
+1.  **Save the Script:** Save the script content to a file, for example, `~/scripts/hypr_display_positioner.sh`.
 2.  **Make it Executable:**
     ```bash
-    chmod +x ~/scripts/hyprland-tools/hypr_display_toggle.sh
+    chmod +x ~/scripts/hypr_display_positioner.sh
     ```
-3.  **Set Laptop Display Name:**
-    Open the script file and locate the `User Configuration` section. Modify the `LAPTOP_DISPLAY_NAME` variable to match your laptop's internal display identifier.
-    ```bash
-    # --- User Configuration ---
-    # Important: Set your laptop's internal display name here.
-    # You can find your display name by running `hyprctl monitors` in a terminal.
-    LAPTOP_DISPLAY_NAME="eDP-1" # Change "eDP-1" if yours is different
-    ```
-    You can find your display's name by running `hyprctl monitors` in a terminal. Common names include `eDP-1`, `LVDS-1`, etc.
+    *The script attempts to auto-detect your displays, so manual configuration of display names within the script is typically not required for common setups.*
 
-### Usage
+## Usage
 
-Run the script from your terminal with one of the following flags:
+Run the script from your terminal with one of the positioning flags:
 
-* **Toggle Horizontal Layout:**
-    ```bash
-    ~/scripts/hyprland-tools/hypr_display_toggle.sh -h
-    ```
-    This will switch the side-by-side arrangement (e.g., if the external monitor is on the left and laptop on the right, it will switch to laptop on the left and external on the right, and vice-versa).
+* **External Left of Laptop:**
+    `~/scripts/hypr_display_positioner.sh -h`
+* **External Right of Laptop:**
+    `~/scripts/hypr_display_positioner.sh -l`
+* **External Above Laptop:**
+    `~/scripts/hypr_display_positioner.sh -k`
+* **External Below Laptop:**
+    `~/scripts/hypr_display_positioner.sh -j`
 
-* **Toggle Vertical Layout:**
-    ```bash
-    ~/scripts/hyprland-tools/hypr_display_toggle.sh -v
-    ```
-    This will switch the stacked arrangement (e.g., if the external monitor is on top and laptop on the bottom, it will switch to laptop on top and external on the bottom, and vice-versa).
+If run without a flag, or with an invalid flag, the script will display usage instructions.
 
-### Example Hyprland Keybindings
+## Example Hyprland Keybindings
 
-Add the following to your `~/.config/hypr/hyprland.conf` file to bind these actions to keys. Remember to adjust the path to the script if yours is different.
+Add these to your `~/.config/hypr/hyprland.conf` (adjust script path and keybindings as needed):
 
 ```ini
-# Define your script path (optional, but can make binds cleaner)
-$SCRIPT = ~/scripts/hyprland-tools/hypr_display_toggle.sh
+# Path to your script
+$DISPLAY_SCRIPT = ~/scripts/hypr_display_positioner.sh
 
-# Example keybindings
-# Replace $mod, P and $mod, SHIFT, P with your preferred key combinations
+# Place External display to the LEFT of Laptop
+bind = $mod, H, exec, $DISPLAY_SCRIPT -h
 
-# Toggle horizontal layout (e.g., External Left/Right of Laptop)
-bind = $mod, P, exec, $SCRIPT -h
+# Place External display to the RIGHT of Laptop
+bind = $mod, L, exec, $DISPLAY_SCRIPT -l
 
-# Toggle vertical layout (e.g., External Top/Bottom of Laptop)
-bind = $mod, SHIFT, P, exec, $SCRIPT -v
-```
+# Place External display ABOVE Laptop
+bind = $mod, K, exec, $DISPLAY_SCRIPT -k
+
+# Place External display BELOW Laptop
+bind = $mod, J, exec, $DISPLAY_SCRIPT -j
+``` 
 
 
 ***
