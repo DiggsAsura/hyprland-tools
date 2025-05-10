@@ -42,13 +42,13 @@ You can usually install `jq` and `bc` via your system's package manager (e.g., `
 Run the script from your terminal with one of the positioning flags:
 
 * **External Left of Laptop:**
-    `~/scripts/toggle_laptop-position-v0.7.sh -h`
+    `~/scripts/toggle_laptop-position_v0.7.sh -h`
 * **External Right of Laptop:**
-    `~/scripts/toggle_laptop-position-v0.7.sh -l`
+    `~/scripts/toggle_laptop-position_v0.7.sh -l`
 * **External Above Laptop:**
-    `~/scripts/toggle_laptop-position-v0.7.sh -k`
+    `~/scripts/toggle_laptop-position_v0.7.sh -k`
 * **External Below Laptop:**
-    `~/scripts/toggle_laptop-position-v0.7.sh -j`
+    `~/scripts/toggle_laptop-position_v0.7.sh -j`
 
 If run without a flag, or with an invalid flag, the script will display usage instructions.
 
@@ -58,19 +58,19 @@ Add these to your `~/.config/hypr/hyprland.conf` (adjust script path and keybind
 
 ```ini
 # Path to your script
-$DISPLAY_SCRIPT = ~/scripts/hypr_display_positioner.sh
+$DISPLAY_SCRIPT = ~/scripts/toggle_laptop_position-v0.7.sh
 
 # Place External display to the LEFT of Laptop
-bind = $mod, H, exec, $DISPLAY_SCRIPT -h
+bind = $mod ALT, H, exec, $DISPLAY_SCRIPT -h
 
 # Place External display to the RIGHT of Laptop
-bind = $mod, L, exec, $DISPLAY_SCRIPT -l
+bind = $mod ALT, L, exec, $DISPLAY_SCRIPT -l
 
 # Place External display ABOVE Laptop
-bind = $mod, K, exec, $DISPLAY_SCRIPT -k
+bind = $mod ALT, K, exec, $DISPLAY_SCRIPT -k
 
 # Place External display BELOW Laptop
-bind = $mod, J, exec, $DISPLAY_SCRIPT -j
+bind = $mod ALT, J, exec, $DISPLAY_SCRIPT -j
 ``` 
 
 
