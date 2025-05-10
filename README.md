@@ -82,6 +82,9 @@ bind = $mod, SHIFT, P, exec, $SCRIPT -v
 ***
 
 
+
+
+
 ## Hyprland Dynamic Workspace Swapper
 
 This script dynamically swaps the active workspaces between two connected monitors in Hyprland. It automatically detects the names of the two monitors, making it a seamless experience if you frequently switch which workspace is on which screen.
