@@ -66,17 +66,20 @@ Add the following to your `~/.config/hypr/hyprland.conf` file to bind these acti
 
 ```ini
 # Define your script path (optional, but can make binds cleaner)
-$SCRIPT_PATH = ~/scripts/hyprland-tools/hypr_display_toggle.sh
+$SCRIPT = ~/scripts/hyprland-tools/hypr_display_toggle.sh
 
 # Example keybindings
 # Replace $mod, P and $mod, SHIFT, P with your preferred key combinations
 
 # Toggle horizontal layout (e.g., External Left/Right of Laptop)
-bind = $mod, P, exec, $SCRIPT_PATH -h
+bind = $mod, P, exec, $SCRIPT -h
 
 # Toggle vertical layout (e.g., External Top/Bottom of Laptop)
-bind = $mod, SHIFT, P, exec, $SCRIPT_PATH -v
+bind = $mod, SHIFT, P, exec, $SCRIPT -v
 ```
+
+
+***
 
 
 ## Hyprland Dynamic Workspace Swapper
