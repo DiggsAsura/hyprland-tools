@@ -42,13 +42,13 @@ You can usually install `jq` and `bc` via your system's package manager (e.g., `
 Run the script from your terminal with one of the positioning flags:
 
 * **External Left of Laptop:**
-    `~/scripts/hypr_display_positioner.sh -h`
+    `~/scripts/toggle_laptop-position-v0.7.sh -h`
 * **External Right of Laptop:**
-    `~/scripts/hypr_display_positioner.sh -l`
+    `~/scripts/toggle_laptop-position-v0.7.sh -l`
 * **External Above Laptop:**
-    `~/scripts/hypr_display_positioner.sh -k`
+    `~/scripts/toggle_laptop-position-v0.7.sh -k`
 * **External Below Laptop:**
-    `~/scripts/hypr_display_positioner.sh -j`
+    `~/scripts/toggle_laptop-position-v0.7.sh -j`
 
 If run without a flag, or with an invalid flag, the script will display usage instructions.
 
