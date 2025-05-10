@@ -3,6 +3,7 @@
 A collection of tools for Hyprland, a dynamic tiling Wayland compositor. This repository includes scripts and utilities to enhance your Hyprland experience. At least my own :) Feel free to use at your own risk.
 
 
+
 ## Hyprland Dynamic Display Layout Toggler
 
 This script provides a flexible way to manage and toggle the layout of a laptop's internal display and a single connected external monitor in a Hyprland environment. It supports both horizontal (side-by-side) and vertical (stacked) arrangements, automatically handling scaling for 4K displays and ensuring correct mouse cursor passthrough.
@@ -75,6 +76,7 @@ bind = $mod, P, exec, $SCRIPT_PATH -h
 
 # Toggle vertical layout (e.g., External Top/Bottom of Laptop)
 bind = $mod, SHIFT, P, exec, $SCRIPT_PATH -v
+```
 
 
 ## Hyprland Dynamic Workspace Swapper
